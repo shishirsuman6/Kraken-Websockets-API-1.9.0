@@ -17,11 +17,14 @@ from datetime import datetime, timedelta
 def result(ws):
     return json.loads(ws.recv())
 
-def book_message_time_baseline():
+def message_time_baseline(t):
     now= datetime.now()
-    now_minus_threshold= now + timedelta(0,-2)
+    now_minus_threshold= now + timedelta(0,t)
     return now_minus_threshold.strftime('%Y-%m-%d %H:%M:%S')
 
 def send_subscribe_book(ws, pair,depth):
     msg_string='{"event": "subscribe", "pair": ["BTC/USD"],"subscription": {"depth": 10,"name": "book"}}'
     ws.send(msg_string)
+
+def pytest_html_report_title(report):
+    report.title = "Kraken Websockets API 1.9.0 - Test Results"

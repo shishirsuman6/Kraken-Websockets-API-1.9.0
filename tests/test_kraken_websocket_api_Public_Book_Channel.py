@@ -190,7 +190,8 @@ def test_subscribe_book_publication_schema_bid_element_length(ws):
    
 @pytest.mark.book_publication
 def test_subscribe_book_publication_ask_timestamp(ws):
-    timestamp_threshold= book_message_time_baseline()
+    t=-2
+    timestamp_threshold= message_time_baseline(t)
     pair='BTC/USD'
     depth=10
     send_subscribe_book(ws[0], pair,depth)
@@ -210,7 +211,8 @@ def test_subscribe_book_publication_ask_timestamp(ws):
 
 @pytest.mark.book_publication
 def test_subscribe_book_publication_bid_timestamp(ws):
-    timestamp_threshold= book_message_time_baseline()
+    t=-2
+    timestamp_threshold= message_time_baseline(t)
     pair='BTC/USD'
     depth=10
     send_subscribe_book(ws[0], pair,depth)
@@ -232,7 +234,8 @@ def test_subscribe_book_publication_bid_timestamp(ws):
 
 @pytest.mark.book_publication
 def test_subscribe_book_heartbeat(ws):
-    timestamp_threshold= book_message_time_baseline()
+    t=-2
+    timestamp_threshold= message_time_baseline(t)
     pair='BTC/USD'
     depth=10
     send_subscribe_book(ws[0], pair,depth)
