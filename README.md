@@ -1,9 +1,9 @@
 # Kraken-Websockets-API-1.9.0
 
 ## Summary
-This is a repository of example on how to use the Python and Pytest framework for validating Kraken Websockets API 1.9.0.  
+This is a repository of example on how to use the Python and Pytest framework for validating [Kraken Websockets API 1.9.0](https://docs.kraken.com/websockets/).  
 It covers the folloiwng:  
-1. Connection to Kraken Websocket API.
+1. Connection to Kraken Websockets API.
 2. Assert details on Public Channel messages (Request and Reponse).
 3. Run Test in pralle mode.
 4. Provide Docker endpoints for ease of installations and execution via container.
@@ -11,20 +11,25 @@ It covers the folloiwng:
 
 ## Test Scenarios:
 
-|__Public Channel Name__|__Test Scenario__|__Staus__|
+|__Public Channel Name__|__Test Scenario__|__Status__|
 |-----------|-----------|-----------|
 |Book|1. Validate Publication Payload elements |Completed |
 | |2. Validate Update Payload elements|Completed |
 | |3. Validate Server heartbeat sent if no subscription traffic within 1 second |Completed |
 | |4. Validate whether publication has price updates in the last 2 seconds (configurable) |Completed|
+| |5. Validate Response Schema | |
+| |6. Validate Invalid Request | |
 |ticker| | |
 |ohlc| | |
 |trade| | |
 |spread| | |
-|General Message| | |
-||1. Validate payload elements of Status sent on connection or system status changes.|Completed|
-||2. Validate server Ping|Completed|
+|General Message|1. Validate payload elements of Status sent on connection or system status changes.|Completed|
+||2. Validate system status Response Schema|Completed|
+||3. Validate server Ping Response with or without optional request fields|Completed|
+||4. Validate server Ping Response Schema|Completed|
+||5. Validate server Ping for various Invalid Requests|Completed, see Notes 1 below|
 
+Notes 1: Requires further evaluation for an unexpected observation. Details are noted in [test_kraken_websocket_api.py](/tests/test_kraken_websocket_api.py): test_ping_response_error_reqid  
 
 ## Docker endpoints:
 Pre-requisite:
@@ -57,5 +62,5 @@ To use this option, make changes in the [pytest.ini](/pytest.ini) file.
 Note: Docker image would require to be re-built if parallel run change are made.
 
 ## Test Run Reports:
-JUnit style XML Report: [report.xml](/report.xml)  
-JUnit style XML Report: [report.html](/report.html)  
+JUnit style XML Report: [Test_Run_Report.xml](/Test_Run_Report.xml)  
+JUnit style XML Report: [Test_Run_Report.html](/Test_Run_Report.html)  

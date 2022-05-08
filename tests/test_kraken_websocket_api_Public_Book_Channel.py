@@ -8,8 +8,10 @@ from numpy import array
 import pytest
 import websocket
 import json
+from jsonschema import validate
 from datetime import datetime, timedelta
 from helper_function import *
+from schema import *
 
 #--------------------------------------------------------------------
 # Tests
