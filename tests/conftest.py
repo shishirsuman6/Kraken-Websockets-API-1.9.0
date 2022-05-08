@@ -6,10 +6,8 @@ import pytest
 import websocket
 import json
 from datetime import datetime, timedelta
+from helper_function import *
 
-def result(ws):
-    return json.loads(ws.recv())
-    
 @pytest.fixture
 def ws(scope="session"):
     # Generator setup
