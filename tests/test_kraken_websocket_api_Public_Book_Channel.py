@@ -4,6 +4,7 @@ The purpose of this test is to show how to use the pytest framework for Kraken W
 #--------------------------------------------------------------------
 #Imports
 #--------------------------------------------------------------------
+from ast import Break
 from numpy import array
 import pytest
 import websocket
@@ -72,6 +73,42 @@ def test_subscribe_book_subscriptionStatus_response_subscription_name(ws):
     subscriptionStatus_response= result(ws[0])
     assert subscriptionStatus_response["subscription"]["name"]=="book" 
 
+@pytest.mark.book_subscription
+def test_subscribe_book_subscriptionStatus_response_schema_validation(ws):
+    pair='BTC/USD'
+    depth=10
+    send_subscribe_book(ws[0], pair,depth)
+    subscriptionStatus_response= result(ws[0])
+    validate(subscriptionStatus_response, schema_subscriptionStatus)
+
+@pytest.mark.book_subscription
+def test_subscribe_book_request_error_errorMessage(ws):
+    pair='USD'
+    depth=10
+    send_subscribe_book(ws[0], pair,depth)
+    subscriptionStatus_response= result(ws[0])
+    assert subscriptionStatus_response["errorMessage"]=="Currency pair not in ISO 4217-A3 format USD"
+
+@pytest.mark.book_subscription
+def test_subscribe_book_request_error_status(ws):
+    pair='BTC'
+    depth=10
+    send_subscribe_book(ws[0], pair,depth)
+    subscriptionStatus_response= result(ws[0])
+    assert subscriptionStatus_response["status"]=="error"
+
+@pytest.mark.book_publication
+def test_subscribe_book_publication_schema_validation(ws):
+    pair='BTC/USD'
+    depth=10
+    send_subscribe_book(ws[0], pair,depth)
+    subscriptionStatus_response= result(ws[0])
+    next_message= result(ws[0])    
+    if 'event' in next_message:
+        book_publication= result(ws[0])
+    else:
+        book_publication=next_message
+    validate(book_publication, schema_book_publication_snapshot)
 
 @pytest.mark.book_publication
 def test_subscribe_book_publication_schema_length(ws):
@@ -236,12 +273,48 @@ def test_subscribe_book_publication_bid_timestamp(ws):
 
 @pytest.mark.book_publication
 def test_subscribe_book_heartbeat(ws):
-    t=-2
+    t=+2
     timestamp_threshold= message_time_baseline(t)
+    pair='BTC/USD'
+    depth=10
+    send_subscribe_book(ws[0], pair,depth)
+    subscriptionStatus_response= result(ws[0])
+    next_message= result(ws[0])
+
+    flag=False
+    count=0
+
+    while datetime.now().strftime('%Y-%m-%d %H:%M:%S')<=timestamp_threshold:           
+        if 'event' in next_message:
+            flag=True
+            count+=1
+        if flag==True and count>1:
+            break            
+        next_message= result(ws[0]) 
+
+    assert next_message["event"] == "heartbeat", "No heartbeat for more then a second"
+
+
+@pytest.mark.book_update
+def test_subscribe_book_update_schema_validation(ws):
     pair='BTC/USD'
     depth=10
     send_subscribe_book(ws[0], pair,depth)
     subscriptionStatus_response= result(ws[0])
     next_message= result(ws[0])    
     if 'event' in next_message:
-        assert next_message["event"] == "heartbeat"
+        book_publication= result(ws[0])
+    else:
+        book_publication=next_message
+    next_message= result(ws[0])
+    flag=False
+
+    while True:           
+        if 'event' not in next_message:
+            flag=True
+        if flag:
+            break            
+        next_message= result(ws[0]) 
+    
+    book_update=next_message 
+    validate(book_update, schema_book_publication_update)

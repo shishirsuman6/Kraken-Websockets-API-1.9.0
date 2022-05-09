@@ -23,7 +23,7 @@ def message_time_baseline(t):
     return now_minus_threshold.strftime('%Y-%m-%d %H:%M:%S')
 
 def send_subscribe_book(ws, pair,depth):
-    msg_string='{"event": "subscribe", "pair": ["BTC/USD"],"subscription": {"depth": 10,"name": "book"}}'
+    msg_string='{"event": "subscribe", "pair": ["' + str(pair) + '"],"subscription": {"depth": ' + str(depth) + ',"name": "book"}}'
     ws.send(msg_string)
 
 def pytest_html_report_title(report):

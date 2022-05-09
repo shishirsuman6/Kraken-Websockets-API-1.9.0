@@ -14,15 +14,17 @@ It covers the folloiwng:
 |__Public Channel Name__|__Test Scenario__|__Status__|
 |-----------|-----------|-----------|
 |Book|1. Validate Publication Payload elements |Completed |
-| |2. Validate Update Payload elements|Completed |
-| |3. Validate Server heartbeat sent if no subscription traffic within 1 second |Completed |
-| |4. Validate whether publication has price updates in the last 2 seconds (configurable) |Completed|
-| |5. Validate Response Schema | |
-| |6. Validate Invalid Request | |
-|ticker| | |
-|ohlc| | |
-|trade| | |
-|spread| | |
+| |2. Validate whether Book publication has Ask price updates in the last t seconds (configurable) |Completed|Completed |
+| |3. Validate whether Book publication has Bid price updates in the last t seconds (configurable) |Completed|
+| |4. Validate Response Schema- subscriptionStatus|Completed|
+| |5. Validate Response Schema- book publication snapshot |Completed|
+| |6. Validate Response Schema- book publication update |Completed|
+| |7. Validate Invalid Request |Completed|
+| |8. Validate Server heartbeat sent more than once within the last 2 seconds |Completed|
+|ticker|1. Validate Response Schema- publication | |
+|ohlc|1. Validate Response Schema- publication | |
+|trade|1. Validate Response Schema- publication | |
+|spread|1. Validate Response Schema- publication | |
 |General Message|1. Validate payload elements of Status sent on connection or system status changes.|Completed|
 ||2. Validate system status Response Schema|Completed|
 ||3. Validate server Ping Response with or without optional request fields|Completed|
@@ -64,3 +66,5 @@ Note: Docker image would require to be re-built if parallel run change are made.
 ## Test Run Reports:
 JUnit style XML Report: [Test_Run_Report.xml](/Test_Run_Report.xml)  
 JUnit style XML Report: [Test_Run_Report.html](/Test_Run_Report.html)  
+
+Command to generate: python -m pytest  

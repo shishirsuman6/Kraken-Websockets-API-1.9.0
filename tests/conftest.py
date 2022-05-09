@@ -9,7 +9,8 @@ from datetime import datetime, timedelta
 from helper_function import *
 
 @pytest.fixture
-def ws(scope="session"):
+# def ws(scope="session"):
+def ws():
     # Generator setup
     SOCKET = 'wss://ws.kraken.com/'
     # Launch the connection to the server.

@@ -35,3 +35,63 @@ schema_systemStatus = {"type" : "object",
                             "event" : {"type" : "string"},
                             "status" : {"type" : "string"},
                             "version" : {"type" : "string"} }}
+
+schema_subscriptionStatus = {"type" : "object", 
+                                "properties" : { 
+                                    "channelName" : {"type" : "string"}, 
+                                    "event" : {"type" : "string"},
+                                    "reqid" : {"type" : "integer"},
+                                    "pair" : {"type" : "string"},
+                                    "status" : {"type" : "string"},
+                                    "subscription" : { "type" : "object",
+                                                        "properties" : { 
+                                                            "depth" : {"type" : "integer"}, 
+                                                            "interval" : {"type" : "integer"},
+                                                            "maxratecount" : {"type" : "integer"},
+                                                            "name" : {"type" : "string"},
+                                                            "token" : {"type" : "string"}}},
+                                    "OneOf" : { "type" : "object",
+                                                        "properties" : { 
+                                                            "errorMessage" : {"type" : "string"}, 
+                                                            "channelID" : {"type" : "integer"}}} }}              
+
+
+schema_book_publication_snapshot = {"type" : "array", 
+                                        "properties" : { 
+                                            "channelID" : {"type" : "integer"}, 
+                                            "channelName" : {"type" : "string"},
+                                            "pair" : {"type" : "string"},
+                                            "": {"type" : "object",
+                                                        "properties" : { 
+                                                            "as" : {"type" : "array",  
+                                                                        "items":{"price" : {"type" : "decimal"},
+                                                                                "volume" : {"type" : "decimal"},
+                                                                                "timestamp" : {"type" : "decimal"} } },
+                                                            "bs" : {"type" : "array",  
+                                                                        "items":{"price" : {"type" : "decimal"},
+                                                                                "volume" : {"type" : "decimal"},
+                                                                                "timestamp" : {"type" : "decimal"} } }
+                                                                        }} }}
+
+schema_book_publication_update = {"type" : "array", 
+                                        "properties" : { 
+                                            "channelID" : {"type" : "integer"}, 
+                                            "channelName" : {"type" : "string"},
+                                            "pair" : {"type" : "string"},
+                                            "AnyOf": { "anyOf" : [{
+                                                            "": {"type" : "object",
+                                                                    "properties" : { 
+                                                                        "a" : {"type" : "array",  
+                                                                                    "items":{"price" : {"type" : "decimal"},
+                                                                                            "volume" : {"type" : "decimal"},
+                                                                                            "timestamp" : {"type" : "decimal"},
+                                                                                            "updateType" : {"type" : "string"} } },
+                                                                        "c" : {"type" : "string"}}},
+                                                            "": {"type" : "object",
+                                                                    "properties" : { 
+                                                                        "b" : {"type" : "array",  
+                                                                                    "items":{"price" : {"type" : "decimal"},
+                                                                                            "volume" : {"type" : "decimal"},
+                                                                                            "timestamp" : {"type" : "decimal"},
+                                                                                            "updateType" : {"type" : "string"} } },
+                                                                        "c" : {"type" : "string"}}}}]}}}
