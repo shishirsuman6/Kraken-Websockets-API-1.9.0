@@ -5,7 +5,7 @@ This is a repository of example on how to use the Python and Pytest framework fo
 It covers the folloiwng:  
 1. Connection to Kraken Websockets API.
 2. Assert details on Public Channel messages (Request and Reponse).
-3. Run Test in pralle mode.
+3. Run Test in prallel mode.
 4. Provide Docker endpoints for ease of installations and execution via container.
 5. Generate HTML and XML reports of Test run results.
 
