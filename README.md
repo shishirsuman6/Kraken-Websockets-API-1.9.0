@@ -65,6 +65,9 @@ Note: Docker image would require to be re-built if parallel run change are made.
 ## Test Run Reports:
 JUnit style XML Report: [Test_Run_Report.xml](/Test_Run_Report.xml)  
 Pytest HTML Report: [Test_Run_Report.html](/Test_Run_Report.html)  
+Example:
+![image](https://user-images.githubusercontent.com/51159089/167330210-1160d24e-e364-43c2-bb74-51c298307b87.png)
+
 
 Command to generate: python -m pytest  
 
