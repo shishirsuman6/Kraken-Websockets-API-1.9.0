@@ -26,5 +26,17 @@ def send_subscribe_book(ws, pair,depth):
     msg_string='{"event": "subscribe", "pair": ["' + str(pair) + '"],"subscription": {"depth": ' + str(depth) + ',"name": "book"}}'
     ws.send(msg_string)
 
+def send_subscribe_spread(ws, pair):
+    msg_string='{"event": "subscribe", "pair": ["' + str(pair) + '"],"subscription": {"name": "spread"}}'
+    ws.send(msg_string)
+
+def send_subscribe_trade(ws, pair):
+    msg_string='{"event": "subscribe", "pair": ["' + str(pair) + '"],"subscription": {"name": "trade"}}'
+    ws.send(msg_string)
+
+def send_subscribe_ohlc(ws, pair, interval):
+    msg_string='{"event": "subscribe", "pair": ["' + str(pair) + '"],"subscription": {"interval": ' + str(interval) + ',"name": "trade"}}'
+    ws.send(msg_string)
+
 def pytest_html_report_title(report):
     report.title = "Kraken Websockets API 1.9.0 - Test Results"

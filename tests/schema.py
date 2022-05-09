@@ -95,3 +95,50 @@ schema_book_publication_update = {"type" : "array",
                                                                                             "timestamp" : {"type" : "decimal"},
                                                                                             "updateType" : {"type" : "string"} } },
                                                                         "c" : {"type" : "string"}}}}]}}}
+
+
+schema_spread_publication = {"type" : "array", 
+                                "properties" : { 
+                                    "channelID" : {"type" : "integer"}, 
+                                    "channelName" : {"type" : "string"},
+                                    "pair" : {"type" : "string"},
+                                    "properties":{"type" : "array",  
+                                                    "items":{
+                                                        "bid" : {"type" : "decimal"},
+                                                        "ask" : {"type" : "decimal"},
+                                                        "timestamp" : {"type" : "decimal"},
+                                                        "bidVolume" : {"type" : "decimal"},
+                                                        "askVolume" : {"type" : "decimal"} } }}}
+
+schema_trade_publication = {"type" : "array", 
+                        "properties" : { 
+                            "channelID" : {"type" : "integer"}, 
+                            "channelName" : {"type" : "string"},
+                            "pair" : {"type" : "string"},
+                            "":{"type" : "array",  
+                                "items":{
+                                    "":{"type" : "array",  
+                                        "items":{
+                                                "price" : {"type" : "decimal"},
+                                                "volume" : {"type" : "decimal"},
+                                                "time" : {"type" : "decimal"},
+                                                "side" : {"type" : "string"},
+                                                "orderType" : {"type" : "string"},
+                                                "misc" : {"type" : "string"}} }}}}}
+
+schema_ohlc_publication = {"type" : "array", 
+                                "properties" : { 
+                                    "channelID" : {"type" : "integer"}, 
+                                    "channelName" : {"type" : "string"},
+                                    "pair" : {"type" : "string"},
+                                    "properties":{"type" : "array",  
+                                                    "items":{
+                                                        "time" : {"type" : "decimal"},
+                                                        "etime" : {"type" : "decimal"},
+                                                        "open" : {"type" : "decimal"},
+                                                        "high" : {"type" : "decimal"},
+                                                        "low" : {"type" : "decimal"},
+                                                        "close" : {"type" : "decimal"},
+                                                        "vwap" : {"type" : "decimal"},
+                                                        "volume" : {"type" : "decimal"},
+                                                        "count" : {"type" : "integer"} } }}}

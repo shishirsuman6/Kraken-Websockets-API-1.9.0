@@ -21,10 +21,9 @@ It covers the folloiwng:
 | |6. Validate Response Schema- book publication update |Completed|
 | |7. Validate Invalid Request |Completed|
 | |8. Validate Server heartbeat sent more than once within the last 2 seconds |Completed|
-|ticker|1. Validate Response Schema- publication | |
-|ohlc|1. Validate Response Schema- publication | |
-|trade|1. Validate Response Schema- publication | |
-|spread|1. Validate Response Schema- publication | |
+|ohlc|1. Validate Response Schema- publication |In Progress, Connection Timeout to be resolved |
+|trade|1. Validate Response Schema- publication |Completed|
+|spread|1. Validate Response Schema- publication |Completed|
 |General Message|1. Validate payload elements of Status sent on connection or system status changes.|Completed|
 ||2. Validate system status Response Schema|Completed|
 ||3. Validate server Ping Response with or without optional request fields|Completed|
@@ -65,6 +64,20 @@ Note: Docker image would require to be re-built if parallel run change are made.
 
 ## Test Run Reports:
 JUnit style XML Report: [Test_Run_Report.xml](/Test_Run_Report.xml)  
-JUnit style XML Report: [Test_Run_Report.html](/Test_Run_Report.html)  
+Pytest HTML Report: [Test_Run_Report.html](/Test_Run_Report.html)  
 
 Command to generate: python -m pytest  
+
+## Test Framework organization:
+[tests](/tests) folder has:  
+1. [conftest.py](/tests/conftest.py) has basic Pytest Fixture for Websockets connection.  
+2. [helper_function.py](/tests/helper_function.py) has functions that provide abstraction of simple actions for the test cases.  
+3. [schema.py](/tests/schema.py) is a schema store to be used durign the validations.
+4. [test_kraken_websocket_api.py](/tests/test_kraken_websocket_api.py) has Test Cases related to Websockets Connection and Ping.
+5. [test_kraken_websocket_api_Public_Book_Channel.py](/tests/test_kraken_websocket_api_Public_Book_Channel.py) has Test Cases related to Public Channel 'Book'.
+6. [test_kraken_websocket_api_Public_Channel_schema_validations.py](/tests/test_kraken_websocket_api_Public_Channel_schema_validations.py) has test cases related to Publication schema validation for other Public Channels.
+
+Other than that: 
+1. [Dockerfile](/Dockerfile) has Docker Blueprint for building images.
+2. [pytest.ini](/pytest.ini) has properties related to Commandline options, Markers, and Testpath.
+3. [requirements.txt](/requirements.txt) has Python environment package versions for Docker Image creation.
